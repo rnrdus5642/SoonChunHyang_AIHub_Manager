@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c server.js)",
+      "Bash(node -c lib/store.js)",
+      "Bash(node -c lib/apiInfo.js)",
+      "Bash(node -c lib/apiRequest.js)",
+      "Bash(node -c config.js)",
+      "Bash(node -c public/app.js)"
+    ]
+  }
+}

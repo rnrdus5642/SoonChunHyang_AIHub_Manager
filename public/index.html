@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School API 모니터</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">⚡</span>
+        <div>
+          <h1>School API 모니터</h1>
+          <p class="subtitle">SCH AI-Hub 크레딧 관리 대시보드</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="settings-btn">⚙ 설정</button>
+        <button class="btn btn-secondary" id="add-btn">＋ 계정 추가</button>
+        <button class="btn btn-primary" id="refresh-btn">🔄 전체 새로고침</button>
+      </div>
+    </header>
+
+    <section class="stats" id="stats">
+      <div class="stat-card">
+        <div class="stat-label">총 계정</div>
+        <div class="stat-value" id="stat-total">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">잔액 부족</div>
+        <div class="stat-value danger" id="stat-low">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">요청 가능</div>
+        <div class="stat-value success" id="stat-requestable">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">정상</div>
+        <div class="stat-value" id="stat-normal">-</div>
+      </div>
+    </section>
+
+    <section class="card table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>이름</th>
+            <th>잔액</th>
+            <th>할당량</th>
+            <th>상태</th>
+            <th>최근 요청</th>
+            <th class="actions-col">액션</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- 토스트 -->
+  <div id="toast" class="toast"></div>
+
+  <!-- 설정 모달 -->
+  <dialog id="settings-modal" class="modal">
+    <form method="dialog" id="settings-form">
+      <h2>⚙ 임계값 설정</h2>
+      <p class="modal-desc">잔액이나 할당량이 임계값 미만이면 표시됩니다.</p>
+
+      <label>
+        <span>잔액 임계값</span>
+        <input type="number" name="balance" min="0" required />
+        <small>이 값 미만이면 "부족"으로 표시</small>
+      </label>
+
+      <label>
+        <span>할당량 임계값</span>
+        <input type="number" name="quota" min="0" required />
+        <small>이 값 미만이면 보충 요청 가능</small>
+      </label>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-close>취소</button>
+        <button type="submit" class="btn btn-primary">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 계정 추가/수정 모달 -->
+  <dialog id="account-modal" class="modal modal-wide">
+    <form method="dialog" id="account-form">
+      <h2 id="account-modal-title">계정 추가</h2>
+
+      <div class="form-grid">
+        <label class="full">
+          <span>이름 *</span>
+          <input type="text" name="name" required />
+        </label>
+
+        <label class="full">
+          <span>API Key *</span>
+          <input type="text" name="apiKey" required />
+        </label>
+
+        <hr class="divider" />
+
+        <h3 class="section-title">📋 보충 요청 폼 데이터</h3>
+
+        <label class="full">
+          <span>성함</span>
+          <input type="text" name="formName" />
+        </label>
+
+        <label class="full">
+          <span>소속(학과/부서)</span>
+          <input type="text" name="affiliation" />
+        </label>
+
+        <label class="full">
+          <span>이용자 구분</span>
+          <select name="userType" id="userType-select"></select>
+        </label>
+
+        <label class="full">
+          <span>주 사용 LLM 모델</span>
+          <input type="text" name="llmModel" placeholder="예: GPT-5.3, Gemini 3.1 Pro" />
+        </label>
+
+        <label class="full">
+          <span>진행 작업 설명</span>
+          <textarea name="workDescription" rows="3"></textarea>
+        </label>
+
+        <label>
+          <span>만족도 (1-5)</span>
+          <input type="number" name="satisfaction" min="1" max="5" value="5" />
+        </label>
+
+        <label>
+          <span>건의사항 (선택)</span>
+          <input type="text" name="suggestions" />
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-close>취소</button>
+        <button type="submit" class="btn btn-primary" id="account-save-btn">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

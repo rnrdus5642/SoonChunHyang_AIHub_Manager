@@ -1,0 +1,14 @@
+{
+  "name": "school-api-auto",
+  "version": "1.0.0",
+  "description": "SCH AI-Hub 크레딧 모니터 및 보충 요청 자동화",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "playwright": "^1.49.0"
+  }
+}
