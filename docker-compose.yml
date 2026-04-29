@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: school-api-auto
+    ports:
+      - "8080:8080"
+    environment:
+      - DATA_DIR=/app/data
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
