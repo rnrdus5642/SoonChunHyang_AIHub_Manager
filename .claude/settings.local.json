@@ -6,7 +6,8 @@
       "Bash(node -c lib/apiInfo.js)",
       "Bash(node -c lib/apiRequest.js)",
       "Bash(node -c config.js)",
-      "Bash(node -c public/app.js)"
+      "Bash(node -c public/app.js)",
+      "Bash(npm install *)"
     ]
   }
 }
